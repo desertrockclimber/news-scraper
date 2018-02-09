@@ -1,0 +1,58 @@
+{{!This page serves up the structure for the Article webpage----}}
+<div class = "container">
+{{!Header with logo----}}
+
+<nav class="navbar navbar-default-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    	<ul class="nav navbar-nav">
+      		<a class="navbar-brand" href="#">
+        		<img alt="Brand" src="glyphicon glyphicon-list-alt">
+        		<li class="active"><a href="#">Home<span class="sr-only">(current)</span></a>
+        		</li>
+        		<li><a href="#">C/B</a>
+        		</li>
+        	</a>	
+        </ul>		
+      	</div>
+    </div>
+  </div>
+</nav>
+{{!Jumbotron----}}
+<div class="jumbotron">
+  <h1>News Scraper</h1>
+  <p>Local KSL News, served hot and fresh. Enjoy!</p>
+  <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get the latest news!</a></p>
+</div>
+
+{{#each result}}
+
+<div class = "news-articles">
+	<a href="{{this.link}}">
+		 <h4 class="news-title">{{this.title}}</h4>
+    </a>
+
+    <div class="card-block">
+            {{!--
+            <h4 class="news-title"></h4>
+            </a>--}}
+            <a href="{{this.link}}">
+                <p class="news-text">{{this.summary}}</p>
+            </a>
+            <br>
+            <a href="/articles/{{this._id}}" class="btn btn-primary">Comment</a>
+        </div>
+    </div>
+    <br>
+    <br> {{/each}}
+
+
+
+    <footer class="footer">
+        <p>....</p>
+    </footer>
+
+</div>
+<!-- /container -->
+
