@@ -55,26 +55,26 @@ request("https://www.ksl.com/", function(err, res, html){
       
     }else {
 
-      console.log(data);
+      console.log(res);
     }
     });
     };
   });
 
   // Log the results once you've looped through each of the elements found with cheerio
-  // res.send("Scrape Complete");
+  res.send("Scrape Complete");
   });
   res.redirect('/');
   })
   app.get("/articles", function(req, res){
     Article.find({}, function(){
-      if (err) {
-        console.log(err);
-      }
-     else {
+     //  if (err) {
+     //    console.log(err);
+     //  }
+     // else {
       res.render("index", {result: doc});
     
-  }
+  // })
   Article.sort({'_id': -1})
 });
 
@@ -82,7 +82,7 @@ request("https://www.ksl.com/", function(err, res, html){
 app.get("/articles/:id", function(req, res){
   Article.findOne({"_id": req.params.id})
   .populate("Notes")
-  .exec(function(err, doc){
+  .exec(function(err, res){
     if (err) {
       console.log(err);
     } else{
@@ -94,10 +94,10 @@ app.get("/articles/:id", function(req, res){
   app.post("/articles/:id", function (req, res) {
     // Create a new note and pass the req.body to the entry
     Note
-      .create(req.body, function (error, doc) {
+      .create(req.body, function (err, res) {
         // Log any errors
         if (error) {
-          console.log(error// Otherwise
+          console.log(err// Otherwise
           );
         } else {
           // Use the article id to find and update it's note
