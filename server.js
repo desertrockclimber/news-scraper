@@ -29,7 +29,12 @@ app.use(express.static("public"));
 mongoose.connect('mongodb: //localhost/test');
 // var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/news-scraper";
 // Connect to the Mongo DB
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/news-scraper"
 mongoose.Promise = Promise;
+
+mongoose.connect(MONGODB_URI, {
+  useMongoClient: true
+});
 
 // connect mongo to Heroku
 
