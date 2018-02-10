@@ -4,7 +4,7 @@ $(document).ready(function(){
   // when the delete button is clicked, run the following function.
   $('.delete-button').on('click', function(){
   e.preventDefault();
-  var reset = location.href +'/'+ $(this).data('comment');
+  var reset = location.href +'/'+ $(this).data('Note');
   // ajax call to delete data
   $.ajax({
     method: "DELETE",

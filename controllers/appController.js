@@ -19,7 +19,7 @@ module.exports = function (app) {
             "\n***********************************\n");
             
 //  Axios is a promised-based http library, similar to jQuery's Ajax method
-app.get("/scrape", function(req, res){
+app.get('/scrape', function(req, res){
   console.log("did this stop here?")
 // Making a request for ksl front page stories. The page's HTML is passed as the callback's third argument
 request("https://www.ksl.com/", function(err, res, html){
@@ -49,40 +49,42 @@ request("https://www.ksl.com/", function(err, res, html){
       result.link = "www.ksl.com"+link,
       result.summary = summary
   
-      Article.create(result, function(err, res){
+      Article.create(result, function(err, doc){
       if (err) {
         console.log(err);
       
     }else {
 
-      console.log(res);
+      console.log(doc);
     }
     });
     };
   });
 
   // Log the results once you've looped through each of the elements found with cheerio
-  res.send("Scrape Complete");
+  console.log("Scrape Complete");
   });
   res.redirect('/');
   })
   app.get("/articles", function(req, res){
-    Article.find({}, function(){
-     //  if (err) {
-     //    console.log(err);
-     //  }
-     // else {
+    Article
+    .find({}, function(err, doc){
+      if (err) {
+        console.log(err);
+      }
+     else {
       res.render("index", {result: doc});
     
-  // })
-  Article.sort({'_id': -1})
+  }
+})
+  .sort({'_id': -1})
 });
 
 
 app.get("/articles/:id", function(req, res){
   Article.findOne({"_id": req.params.id})
-  .populate("Notes")
-  .exec(function(err, res){
+  Article.populate("Notes")
+  Article.exec(function(err, doc){
     if (err) {
       console.log(err);
     } else{
@@ -151,6 +153,6 @@ app.get("/articles/:id", function(req, res){
         }
       });
   });
-})
+
 };
 
